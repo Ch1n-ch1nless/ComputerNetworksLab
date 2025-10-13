@@ -3,12 +3,13 @@ import argparse
 import sys
 import os
 
-sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
+# Добавляем текущую директорию в путь для импорта
+sys.path.insert(0, os.path.dirname(__file__))
 
-from tcp_server import TCPServer
-from tcp_client import TCPClient
-from udp_server import UDPServer
-from udp_client import UDPClient
+from src.tcp_server import TCPServer
+from src.tcp_client import TCPClient
+from src.udp_server import UDPServer
+from src.udp_client import UDPClient
 
 def run_tcp_server(host: str, port: int):
     """Запускает TCP сервер"""

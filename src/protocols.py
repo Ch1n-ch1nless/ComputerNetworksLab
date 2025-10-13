@@ -8,19 +8,21 @@ class TCPProtocol:
     def prepare_message(data: bytes) -> bytes:
         """Подготавливает сообщение с заголовком длины"""
         length = len(data)
-        header = struct.pack('!I', length)
+        header = struct.pack('!I', length)  # 4-байтовый заголовок с длиной
         return header + data
     
     @staticmethod
     def receive_message(sock, buffer_size: int = 4096) -> Tuple[bool, bytes]:
         """Принимает сообщение с заголовком длины"""
         try:
+            # Получаем заголовок с длиной
             header = sock.recv(4)
             if not header:
                 return False, b""
-
+            
             message_length = struct.unpack('!I', header)[0]
-
+            
+            # Получаем данные
             received_data = b""
             while len(received_data) < message_length:
                 remaining = message_length - len(received_data)
@@ -28,9 +30,9 @@ class TCPProtocol:
                 if not chunk:
                     return False, b""
                 received_data += chunk
-
+            
             return True, received_data
-
+            
         except (ConnectionResetError, struct.error):
             return False, b""
 

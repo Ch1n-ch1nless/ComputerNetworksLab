@@ -1,5 +1,5 @@
 import socket
-from protocols import TCPProtocol
+from src.protocols import TCPProtocol  # Абсолютный импорт
 
 class TCPClient:
     def __init__(self, host: str = 'localhost', port: int = 8888, buffer_size: int = 4096):
@@ -25,9 +25,11 @@ class TCPClient:
             return "Не подключен к серверу"
         
         try:
+            # Отправка сообщения
             message_data = TCPProtocol.prepare_message(message.encode('utf-8'))
             self.socket.sendall(message_data)
-
+            
+            # Получение ответа
             success, response_data = TCPProtocol.receive_message(self.socket, self.buffer_size)
             if success and response_data:
                 return response_data.decode('utf-8')

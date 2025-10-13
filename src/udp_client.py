@@ -1,5 +1,5 @@
 import socket
-from protocols import UDPProtocol
+from src.protocols import UDPProtocol  # Абсолютный импорт
 
 class UDPClient:
     def __init__(self, host: str = 'localhost', port: int = 8889, buffer_size: int = 4096, timeout: float = 5.0):
@@ -26,8 +26,10 @@ class UDPClient:
             return "Сокет не создан"
         
         try:
+            # Отправка сообщения
             self.socket.sendto(UDPProtocol.create_message(message), (self.host, self.port))
-
+            
+            # Получение ответа
             data, addr = self.socket.recvfrom(self.buffer_size)
             return UDPProtocol.parse_message(data)
             
