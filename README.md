@@ -115,9 +115,8 @@ python3 main.py --mode udp_client --host localhost --port 8888
 
 ## Тестирование кода
 
-Прочитайте в `TESTS.md`
+Прочитайте в [TESTS.md](TESTS.md)
 
 ## Описание протокола
 
-Мини описание находится в `PROTOCOL.md`
-
+Мини описание находится в [PROTOCOL.md](PROTOCOL.md)
