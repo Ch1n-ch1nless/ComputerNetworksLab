@@ -69,7 +69,7 @@ def main():
                        required=True, help='Режим работы')
     parser.add_argument('--host', default='localhost', help='Хост для подключения')
     parser.add_argument('--port', type=int, default=8888, help='Порт для подключения')
-    parser.add_argument('--udp-port', type=int, default=8889, help='Порт для UDP (по умолчанию 8889)')
+    # parser.add_argument('--udp-port', type=int, default=8889, help='Порт для UDP (по умолчанию 8889)')
     
     args = parser.parse_args()
     
@@ -78,9 +78,9 @@ def main():
     elif args.mode == 'tcp_client':
         run_tcp_client(args.host, args.port)
     elif args.mode == 'udp_server':
-        run_udp_server(args.host, args.udp_port)
+        run_udp_server(args.host, args.port)
     elif args.mode == 'udp_client':
-        run_udp_client(args.host, args.udp_port)
+        run_udp_client(args.host, args.port)
 
 if __name__ == "__main__":
     main()
